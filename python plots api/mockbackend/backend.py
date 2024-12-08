@@ -20,7 +20,7 @@ def send_post_request(functionstr, title):
             f.write(image_data)
 
 
-send_post_request("x + 10", "title")
+send_post_request("z", "title")
 
 
 
