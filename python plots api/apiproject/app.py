@@ -26,7 +26,10 @@ def plot():
 
         func_symbol = sympy.sympify(function_str)
         variables = func_symbol.free_symbols
-        dependent_variable = variables.pop()
+        if not variables:
+            dependent_variable = sympy.symbols("x")
+        else: 
+            dependent_variable = variables.pop()
         f = sympy.lambdify(dependent_variable, func_symbol)
         x = np.linspace(-10, 10, 200)
         y = f(x)
