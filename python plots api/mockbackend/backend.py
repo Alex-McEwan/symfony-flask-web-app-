@@ -23,7 +23,7 @@ def send_post_request(functionstr, title):
             f.write(image_data)
 
 
-send_post_request("sin(x)", "alt")
+send_post_request("sin(x) + x", "alt")
 
 
 
