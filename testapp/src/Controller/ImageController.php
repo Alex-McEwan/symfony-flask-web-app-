@@ -9,7 +9,7 @@ use Psr\Log\LoggerInterface;
 
 class ImageController extends AbstractController
 {
-    #[Route('/displayplot', name: 'display_plot')]
+    #[Route('/retrieve_plot', name: 'retrieve_plot')]
     public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger): Response
     {
         try {

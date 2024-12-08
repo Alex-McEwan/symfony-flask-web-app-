@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
-    #[Route('/lucky/number')]
+    #[Route('/', name:'home')]
     public function number(): Response
     {
         $number = 60;
