@@ -6,17 +6,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ImageController extends AbstractController
 {
     #[Route('/retrieve_plot', name: 'retrieve_plot')]
-    public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger, Array $payload = ['function' => 'x', 'title' => 'Default Title']): Response
+    public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger, Request $request): Response
     {
         try {
             $logger->info("sending post request to api");
 
             $endpoint = '/plot';
-
+            $function = $request->query->get('function', 'x'); 
+            $title = $request->query->get('title', 'Default Title');
+            $payload = [
+                'function' => $function,
+                'title' => $title,
+            ];
 
             $imageData = $pythonApiClient->post($endpoint, $payload);
 

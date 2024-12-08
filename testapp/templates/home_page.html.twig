@@ -10,10 +10,14 @@
         <h1>First test plotting application</h1>
     </header>
     <main>
-        <p>Enter the function you want:p>
+        <p>Enter the function you want:<p>
         <form action="{{ path('home') }}" method="POST">
             <label for="function">Function:</label>
-            <input type="text" id="function" name="function" placeholder="for  :  x^2 " required>
+            <input type="text" id="function" name="function" placeholder="for example :  x^2 " required>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="the title" required>
+
             <button type="submit">Generate Plot</button>
         </form>
 
