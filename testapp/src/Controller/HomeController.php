@@ -1,22 +1,19 @@
 <?php
-// src/Controller/LuckyController.php
 namespace App\Controller;
-use Symfony\Component\Routing\Attribute\Route;
-
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class HomeController
+
+class HomeController extends AbstractController
 {
-    #[Route('/', name:'home')]
-    public function number(): Response
+    #[Route('/', name: 'home')] 
+    public function renderHomePage(): Response
     {
-        $number = 60;
-
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
+        return $this->render('home_page.html.twig', [
+            'imageEndpoint' => $this->generateUrl('retrieve_plot'), 
+        ]);
     }
 }
-
 
 
