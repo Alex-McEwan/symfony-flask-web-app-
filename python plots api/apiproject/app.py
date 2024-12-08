@@ -42,7 +42,6 @@ def plot():
         plt.xlabel(dependent_variable_str)
         plt.ylabel("y")
         plt.title(title)
-        plt.savefig(r"C:\vscode\symfonywebapp\python plots api\apiproject\imageplot.png", format="png")
         buf = io.BytesIO()
         plt.savefig(buf, format="jpeg")
         
@@ -50,7 +49,6 @@ def plot():
         image_base64 = base64.b64encode(buf.read()).decode("utf-8")
         buf.close()
 
-        # Return the base64 string in the response
         return jsonify({"plot": image_base64})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
