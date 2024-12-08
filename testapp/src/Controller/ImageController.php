@@ -16,7 +16,7 @@ class ImageController extends AbstractController
             $logger->info("sending post request to api");
 
             $endpoint = '/plot';
-            $payload = ['function' => 'x', "title" => "title"]; 
+            $payload = ['function' => 'x', "title" => "title from symfony"]; 
 
 
             $imageData = $pythonApiClient->post($endpoint, $payload);

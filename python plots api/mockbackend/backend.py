@@ -10,7 +10,7 @@ def send_get_request():
 def send_post_request(functionstr, title):
     response = requests.post("http://localhost:5000/plot", json={"function": functionstr, "title":title})
     if response.status_code == 200:
-        print("BETER WERKT DEZE KANKER ZOOI ")
+        print("BETER WERKT DEZE ONZIN ")
         image_data64 = response.json().get('plot')
         image_data = base64.b64decode(image_data64)
 

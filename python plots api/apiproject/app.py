@@ -20,6 +20,7 @@ def plot():
         data = request.json
         function_str = data.get("function")
         title = data.get("title", "default title")
+        print("THE FUNCTION IS", function_str, "THE TITLE IS:", title)
         if not function_str:
             return jsonify({"error": "Function is required"}), 400
 
@@ -38,9 +39,10 @@ def plot():
         plt.xlabel(dependent_variable_str)
         plt.ylabel("y")
         plt.title(title)
-
+        plt.savefig(r"C:\vscode\symfonywebapp\python plots api\apiproject\imageplot.png", format="png")
         buf = io.BytesIO()
-        plt.savefig(buf, format="png")
+        plt.savefig(buf, format="jpeg")
+        
         buf.seek(0)
         image_base64 = base64.b64encode(buf.read()).decode("utf-8")
         buf.close()
