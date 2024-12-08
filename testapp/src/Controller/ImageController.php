@@ -13,16 +13,13 @@ class ImageController extends AbstractController
     public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger): Response
     {
         try {
-            $logger->info("Starting to get the image from the API...");
+            $logger->info("sending post request to api");
 
             $endpoint = '/plot';
             $payload = ['function' => 'x', "title" => "title"]; 
 
-            $logger->debug("Sending request to Python API with endpoint: $endpoint and payload: " . json_encode($payload));
 
             $imageData = $pythonApiClient->post($endpoint, $payload);
-
-            $logger->info("Image successfully decoded. Binary data length: " . strlen($imageData));
 
             return new Response(
                 $imageData,
@@ -31,7 +28,7 @@ class ImageController extends AbstractController
             );
         } catch (\Exception $e) {
             $logger->error("Error occurred: " . $e->getMessage());
-
+            $logger->info("couldnt send the request to the api");
             return new Response('Error: ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
