@@ -9,6 +9,9 @@ def send_get_request():
 
 def send_post_request(functionstr, title):
     response = requests.post("http://localhost:5000/plot", json={"function": functionstr, "title":title})
+    if response.status_code != 200: 
+        response = requests.post("http://api:5000/plot", json={"function": functionstr, "title":title})
+
     if response.status_code == 200:
         print("BETER WERKT DEZE ONZIN ")
         image_data64 = response.json().get('plot')
@@ -20,7 +23,7 @@ def send_post_request(functionstr, title):
             f.write(image_data)
 
 
-send_post_request("sin(x)", "alt title")
+send_post_request("sin(x)", "alt")
 
 
 
