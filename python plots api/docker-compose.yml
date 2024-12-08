@@ -24,6 +24,6 @@ services:
       - ./mockbackend:/app
     depends_on:
       api:
-        condition: service_healthy  # This will make mock-backend wait for the api to be healthy
+        condition: service_healthy  
 
 
