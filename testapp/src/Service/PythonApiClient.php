@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Service;
+
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+class PythonApiClient
+{
+    private HttpClientInterface $httpClient;
+    private string $pythonAPIstring = "http://localhost:5000";
+
+    public function __construct(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
+    public function post(string $endpoint, array $payload): string
+    {
+        $url = $this->pythonAPIstring . $endpoint;
+
+        $response = $this->httpClient->request(
+            'POST',
+            $url,
+            [
+                'json' => $payload,
+            ]
+        );
+
+        if ($response->getStatusCode() !== 200) {
+            throw new \Exception('Error communicating with Python API: ' . $response->getStatusCode());
+        }
+
+        $response_image64 = $response->getContent();
+        $binary_image = base64_decode($response_image64);
+
+        return $binary_image;
+
+    }
+}
+
+
+
