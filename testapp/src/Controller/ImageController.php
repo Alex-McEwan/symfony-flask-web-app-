@@ -33,7 +33,7 @@ class ImageController extends AbstractController
                 ['Content-Type' => 'image/png']  
             );
         } catch (\Exception $e) {
-            $logger->error("Error occurred: " . $e->getMessage());
+            $logger->error("Error: " . $e->getMessage());
             $logger->info("couldnt send the request to the api");
             return new Response('Error: ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
