@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./apiproject
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./apiproject:/app
+    environment:
+      FLASK_ENV: development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 3s
+      retries: 10
+      start_period: 10s
+      timeout: 10s
+
+  mock-backend:
+    build:
+      context: ./mockbackend
+    volumes:
+      - ./mockbackend:/app
+    depends_on:
+      api:
+        condition: service_healthy  # This will make mock-backend wait for the api to be healthy
+
+

@@ -29,8 +29,9 @@ class PythonApiClient
             throw new \Exception('Error communicating with Python API: ' . $response->getStatusCode());
         }
 
-        $response_image64 = $response->getContent();
-        $binary_image = base64_decode($response_image64);
+        $response_image64_raw = $response->getContent();
+        $response_image64 = explode(',', $response_image64_raw);
+        $binary_image = base64_decode($response_image64[1]);
 
         return $binary_image;
 
