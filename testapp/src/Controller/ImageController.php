@@ -10,13 +10,12 @@ use Psr\Log\LoggerInterface;
 class ImageController extends AbstractController
 {
     #[Route('/retrieve_plot', name: 'retrieve_plot')]
-    public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger): Response
+    public function displayPlot(PythonApiClient $pythonApiClient, LoggerInterface $logger, Array $payload = ['function' => 'x', 'title' => 'Default Title']): Response
     {
         try {
             $logger->info("sending post request to api");
 
             $endpoint = '/plot';
-            $payload = ['function' => 'x', "title" => "title from symfony"]; 
 
 
             $imageData = $pythonApiClient->post($endpoint, $payload);

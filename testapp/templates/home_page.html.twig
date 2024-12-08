@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Dynamic Plot</title>
+    <title>symfony plotting application</title>
 </head>
 <body>
     <header>
         <h1>First test plotting application</h1>
     </header>
     <main>
+        <p>Enter the function you want:p>
+        <form action="{{ path('home') }}" method="POST">
+            <label for="function">Function:</label>
+            <input type="text" id="function" name="function" placeholder="for  :  x^2 " required>
+            <button type="submit">Generate Plot</button>
+        </form>
+
+
         <p>This is the plot that was fetched from the python api</p>
         <img src="{{ imageEndpoint }}" alt="didnt manage to find the plot">
+
+
     </main>
 </body>
 </html>
