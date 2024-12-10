@@ -79,7 +79,6 @@ def generate_plot3d(function_string, title):
     ax.set_ylabel(str(dependent_variable2))
     ax.set_zlabel("z")
     ax.set_title(title)
-    plt.show()
     buf = io.BytesIO()
     plt.savefig(buf, format="jpeg")
     buf.seek(0)
@@ -108,8 +107,17 @@ def plot():
         return jsonify({"error": str(e)}), 400
 
 
+@app.route("/plot3d", methods=["POST"])
+def plot3d():
+    try:        
+        data = request.json
+        function_str = data.get("function")
+        title = data.get("title", "default title")
+        image_base64 = generate_plot3d(function_str, title)
 
-
+        return jsonify({"plot": image_base64})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400 
 
 @app.route("/")
 def home():
@@ -117,7 +125,6 @@ def home():
 
 
 
-generate_plot3d("1 - x^2 - y^2", "title")
 
 
 app.run(host="0.0.0.0", port=5000, debug=True)

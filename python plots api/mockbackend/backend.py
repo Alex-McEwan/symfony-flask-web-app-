@@ -29,8 +29,31 @@ def send_post_request(functionstr, title):
         with open("plot.png", "wb") as f:
             f.write(image_data)
 
+
+def send_post_request_3d(functionstr, title):
+    print("POST REQUEST SENT FOR 3D PLOT")
+    try: 
+        response = requests.post("http://localhost:5000/plot3d", json={"function": functionstr, "title":title})
+        print("SUCCESFULLY MADE A CONNECTION TO THE NON CONTAINERIZED APP")
+        print("THE STATUS CODE IS", response.status_code)
+    except:
+        print("WHY IS IT EXCEPTING")
+        response = requests.post("http://api:5000/plot3d", json={"function": functionstr, "title":title})
+        
+
+    "IS THIS CODE RAN?"
+    if response.status_code == 200:
+        print("BETER WERKT DEZE ONZIN ")
+        image_data64 = response.json().get('plot')
+        image_data = base64.b64decode(image_data64)
+
+
+        image = Image.open(io.BytesIO(image_data))
+        with open("plot.png", "wb") as f:
+            f.write(image_data)
+
 print("STARTING MOCK BACKEND")
-send_post_request("log(x)", "title")
+send_post_request_3d("x^2 + y^2", "title")
 
 
 
