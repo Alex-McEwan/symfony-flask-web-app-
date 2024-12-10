@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>symfony plotting application</title>
+        <script>
+        function updatePlaceholders() {
+            let plotType = document.getElementById("plotType").value;
+            let functionInput = document.getElementById("function");
+
+            if (plotType === "/plot") {
+                functionInput.placeholder = "For example: x^2";
+            } else if (plotType === "/plot3d") {
+                functionInput.placeholder = "For example: x^2 + y^2";
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -18,7 +30,7 @@
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" placeholder="the title" required>
 
-            <select id="plotType" name="plotType">
+            <select id="plotType" name="plotType", onchange=updatePlaceholders()>
                 <option value="/plot">2D Plot</option>
                 <option value="/plot3d">3D Plot</option>
             </select>
@@ -27,7 +39,7 @@
         </form>
 
 
-        <p>This is the plot that was fetched from the python api</p>
+        <p>obtained plot from python api:</p>
         <img src="{{ imageEndpoint }}" alt="didnt manage to find the plot">
 
 
