@@ -17,7 +17,7 @@ class ImageController extends AbstractController
         try {
             $logger->info("sending post request to api");
 
-            $endpoint = '/plot';
+            $endpoint = $request->query->get("endpoint", "/plot");
             $function = $request->query->get('function', 'x'); 
             $title = $request->query->get('title', 'Default Title');
             $payload = [

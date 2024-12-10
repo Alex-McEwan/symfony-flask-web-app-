@@ -17,10 +17,11 @@ class HomeController extends AbstractController
         if ($request->isMethod('POST')) {
             $function = $request->request->get('function', 'x'); 
             $title = $request->request->get('title', 'title'); 
-
+            $plotType = $request->request->get('plotType');
             $imageEndpoint = $this->generateUrl('retrieve_plot', [
                 'function' => $function,
                 'title' => $title,
+                "endpoint" => $plotType,
             ]);
         }
         return $this->render('home_page.html.twig', [
