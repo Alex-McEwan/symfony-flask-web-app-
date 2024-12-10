@@ -8,12 +8,17 @@ def send_get_request():
     print(f"Response from API: {response.text}")
 
 def send_post_request(functionstr, title):
+    print("POST REQUEST SENT")
     try: 
         response = requests.post("http://localhost:5000/plot", json={"function": functionstr, "title":title})
-
+        print("SUCCESFULLY MADE A CONNECTION TO THE NON CONTAINERIZED APP")
+        print("THE STATUS CODE IS", response.status_code)
     except:
+        print("WHY IS IT EXCEPTING")
         response = requests.post("http://api:5000/plot", json={"function": functionstr, "title":title})
+        
 
+    "IS THIS CODE RAN?"
     if response.status_code == 200:
         print("BETER WERKT DEZE ONZIN ")
         image_data64 = response.json().get('plot')
@@ -24,8 +29,8 @@ def send_post_request(functionstr, title):
         with open("plot.png", "wb") as f:
             f.write(image_data)
 
-
-send_post_request("sin(x) + 4", "title")
+print("STARTING MOCK BACKEND")
+send_post_request("log(x)", "title")
 
 
 
