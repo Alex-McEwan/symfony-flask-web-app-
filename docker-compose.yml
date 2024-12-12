@@ -3,11 +3,11 @@ version: '3.8'
 services:
   api:
     build:
-      context: ./apiproject
+      context: ./python plots api/apiproject
     ports:
       - "5000:5000"
     volumes:
-      - ./apiproject:/app
+      - ./python plots api/apiproject:/app
     environment:
       FLASK_ENV: development
     healthcheck:
@@ -19,9 +19,9 @@ services:
 
   mock-backend:
     build:
-      context: ./mockbackend
+      context: ./python plots api/mockbackend
     volumes:
-      - ./mockbackend:/app
+      - ./python plots api/mockbackend:/app
     depends_on:
       api:
         condition: service_healthy  
