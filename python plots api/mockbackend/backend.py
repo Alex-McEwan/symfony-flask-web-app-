@@ -31,7 +31,7 @@ def send_post_request(functionstr, title, endpoint):
 
 
 print("STARTING MOCK BACKEND")
-send_post_request("x^2", "test for new compose file", "plot")
+send_post_request("x^2", "other title", "plot")
 
 
 
